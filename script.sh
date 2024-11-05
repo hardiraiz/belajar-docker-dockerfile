@@ -62,3 +62,38 @@ docker container create --name expose -p 8080:8080 hardi/expose
 docker container start expose
 
 curl localhost:8080
+
+# ENV Instruction
+docker build -t hardi/env env
+
+docker image inspect hardi/env
+
+docker container create --name env --env APP_PORT=9090 -p 9090:9090 hardi/env # mengubah port ketika membuat container
+
+docker container start env
+
+docker container logs env
+
+# VOLUME Instruction
+docker build -t hardi/volume volume
+
+docker image inspect hardi/volume
+
+docker container create --name volume -p 8080:8080 hardi/volume
+
+docker container start volume
+
+docker container logs volume # buka localhost dan tambahkan path url secara bebas
+
+docker container inspect volume # pada Mounts anda akan melihat id volume
+
+# WORKDIR Instruction
+docker build -t hardi/workdir workdir
+
+docker container create --name workdir -p 8080:8080 hardi/workdir
+
+docker container start workdir
+
+docker container exec -i -t workdir /bin/sh
+
+pwd
